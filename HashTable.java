@@ -12,11 +12,7 @@ public class HashTable {
 			int version;
 			String insurance_company;
 			Node nextNode; 
-	/*
-	 * 		this is the node constructor. it creates the node
-	 * @param name this is the name for the country 
-			 * @param gdpPerCapita this is the GDP per Capita for the country
-	 */
+
 		public Node(String userID, String first_name, String last_name, int version, String insurance_company) { 
 			this.userID = userID;
 			this.first_name = first_name;
@@ -51,11 +47,7 @@ public class HashTable {
 		
 		
 		}
-	/*
-	 * this method creates the index with unicode from the country name
-	 * @param name this is the name for the country 
-		
-	 */
+
 		public int hashFunc(String name)
 		{
 			int sum = 0;
@@ -75,11 +67,7 @@ public class HashTable {
 				 return index; 
 				 
 		}
-		/*
-		 * this method inserts the node into the hash tree
-		 * @param name this is the name for the country 
-			 * @param gdpPerCapita this is the GDP per Capita for the country
-		 */
+
 		public void insert(String userID, String first_name, String last_name, int version, String insurance_company)
 		{
 			Node newNode = new Node(userID, first_name, last_name, version, insurance_company);
@@ -151,9 +139,7 @@ public class HashTable {
 			}
 			
 			
-			/*
-			 * this method prints the node in the hash tree
-			 */		
+		
 			public void displaylist()
 			{
 				
@@ -220,24 +206,23 @@ public class HashTable {
 					{
 						String str1 = current.userID;
 						String str2 = index.userID; 
-						int compare = str1.compareTo(str2);
 						Boolean comp = str1.equalsIgnoreCase(str2);
-						System.out.println(compare);
-						System.out.println(comp);
-						System.out.println("Current: " + current.userID);
-						System.out.println("Index: " + index.userID);
+						//System.out.println(compare);
+						//System.out.println(comp);
+						//System.out.println("Current: " + current.userID);
+						//System.out.println("Index: " + index.userID);
 
 						if(comp == true)
 						{
-							System.out.println("MADE IT HERE!");
+							//System.out.println("MADE IT HERE!");
 							if(current.version > index.version)
 							{
-								System.out.println("Current Version is more new");
+								//System.out.println("Current Version is more new");
 								delete(index.userID, index.version);
 							}
 							else
 							{
-								System.out.println("Index Version is more new");
+								//System.out.println("Index Version is more new");
 								delete(current.userID, current.version);
 							}
 						}
