@@ -6,9 +6,11 @@ closed and nested.
 */
 import java.util.Scanner;
 public class ParChecker {
+	//arrays containing symbols to check for pair.
 	static char[] opar = {'(', '{', '['};
 	static char[] cpar = {')', '}', ']'};
-
+	
+	//function to check if char is open symbol returns 1 if true and 0 if false. 
 	public static int open_check(char test, char[] array){
 
 		for(int i = 0; i<3; i++)
@@ -20,7 +22,7 @@ public class ParChecker {
 		} 
 		return 0;
 	}
-
+	//function to check if char is open symbol returns 1 if true and 0 if false. 
 	public static int closed_check(char test,char[] array){
 
 		for(int i = 0; i<3; i++)
@@ -33,6 +35,8 @@ public class ParChecker {
 		return 0;
 	}
 
+	//function to determine if there are a pair of symbols. 
+	//returns Boolean by calling open and closed check and adding or subtracting to par variable.
     public static Boolean Parcheck(int len, char[] chars)
     {
         int par = 0;
@@ -63,16 +67,18 @@ public class ParChecker {
         }
     }
 
-	//accept string in arguments
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+	    
+	//asks user to enter string with parenthesis
         System.out.println("Enter a string with parenthesis");
+	//read input with scanner
         String input = sc.next();
         sc.close();
-
+	//change string to char array
     	char[] chars = input.toCharArray();
     	int len = input.length();
-
+	//call Parcheck function inside of print statement to print out the Boolean returned.
         System.out.println(Parcheck(len, chars));
     	
     }
