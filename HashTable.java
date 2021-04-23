@@ -12,7 +12,7 @@ public class HashTable {
 			int version;
 			String insurance_company;
 			Node nextNode; 
-
+		//constructor 
 		public Node(String userID, String first_name, String last_name, int version, String insurance_company) { 
 			this.userID = userID;
 			this.first_name = first_name;
@@ -21,7 +21,7 @@ public class HashTable {
 			this.insurance_company = insurance_company;    
 			} 
 	 /*
-	  * this method prints the node
+	  * this method prints the node for debugging purposes
 	  */
 		public void printNode() {  
 			System.out.printf("insurance: " + insurance_company + " " + "First Name: " + first_name);  
@@ -47,14 +47,18 @@ public class HashTable {
 		
 		
 		}
-
+		// hash function by adding char values of insurance company. 
+		//used %(modulus) to get scale into size of array
 		public int hashFunc(String name)
 		{
 			int sum = 0;
 			int index = 0;
 	 
 				 char [] chars = name.toCharArray();
-				 for (int i = 0; i < name.length(); i++)
+				
+				 //this line added to improve runtime
+				 int len = name.length();
+				 for (int i = 0; i < len; i++)
 				 {
 					 char ch = chars[i];
 					 int u = ch;
@@ -67,14 +71,14 @@ public class HashTable {
 				 return index; 
 				 
 		}
-
+		//insert user data into hasharray. If value already exist add to linked list
 		public void insert(String userID, String first_name, String last_name, int version, String insurance_company)
 		{
 			Node newNode = new Node(userID, first_name, last_name, version, insurance_company);
 			int hashVal = hashFunc(insurance_company);
 			hashArray[hashVal].insertEnd(newNode);	
 		}
-					
+		//display table for debugging 	
 		public void displayTable()
 		{
 			
@@ -87,14 +91,16 @@ public class HashTable {
 			}
 				
 		}
-
+		//function to add data from hashtable to new csv files named after insurance company 
 		public void insertTable() throws IOException
 		{
 			for(int j=0; j<10; j++)
 			{
-				
+				//sort data points in list by last name and then first name
 				hashArray[j].sortList();
+				//check if there are duplicate userID's and only keep most recent version
 				hashArray[j].checkID();
+				//insert into new csv
 				hashArray[j].insertList();
 			}
 		}
@@ -156,7 +162,9 @@ public class HashTable {
 				}
 				System.out.println("");
 			}
-
+			//insert data from hashtable to new csv files
+			// issue I ran into was creating a new csv file everytime data was being inserted which would cause previous data to be deleted.
+			//took Filewriter outside of while loop tp fix the problem
 			public void insertList() throws IOException
 			{
 				Node current = first;
@@ -195,7 +203,10 @@ public class HashTable {
 				csvWriter.close();
 				}
 			}
-
+			
+			//check for duplicate userIds
+			//while commenting this function only works with my testpoints. 
+			//add another loop to iterate current through the linked list
 			public void checkID()
 			{
 				Node current = first; 
@@ -230,8 +241,8 @@ public class HashTable {
 					}
 				}
 			}
-
-
+		
+			//sort list in hashtable by last name and then first name
 			public void sortList()
 			{
 		  
@@ -308,7 +319,7 @@ public class HashTable {
 			}
 
 
-
+			//delete function is used if there are duplicate UserID's
 			public void delete(String userID, int version)
 		{
 			Node previous = null;
